@@ -6,6 +6,9 @@ body > section{
     display: none;
     padding: 2em;
 }
+#start{
+    text-align: center;    
+}
 #in-progress{
    
 }
@@ -48,9 +51,11 @@ body > section{
 .correct [data-confirm=correct]:before{
     content: 'X';   
 }
+
+
 #score{
     position: fixed;
-    bottom: -50px;
+    bottom: -100px;
     left: 0;
     width: 100%;
     transition: all .3s;
@@ -58,9 +63,38 @@ body > section{
 #score .container{
     padding: .5em;
     background: darkgray;
-    height: 50px;
+    height: 100px;
+    overflow: auto;
 }
 #score.shown{
     top: inherit;
     bottom: 0;
+}
+#team-a{
+    float: left;   
+}
+#team-b{
+    float: right;   
+}
+#score .team{
+    font-size: .7em;
+}
+#score .score{
+    font-size: 2em;   
+}
+.rounds{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.rounds li{
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin: 3px;
+}
+.rounds li.complete{
+    background: white;   
 }
