@@ -30,17 +30,25 @@
     </section>
     
     <section id="scoreboard">
-        Team A
+        <span class="team-0-name">Team A</span>
         <span class="team-0">0</span>
-        Team B
+        <ol class="rounds">
+            <li></li><li></li><li></li><li></li><li></li><li></li>
+        </ol>
+        
+        <span class="team-1-name">Team B</span>
         <span class="team-1">0</span>
+        <ol class="rounds">
+            <li></li><li></li><li></li><li></li><li></li><li></li>
+        </ol>
+        
         <button class="start-round">Start Next Round</button>
-        <div><span class="current-team">Team</span> are next.</div>
+        <div><span class="current-team">Team</span> are up next.</div>
     </section>
     
     <section id="gameover">
         <h1>Game Over</h1>
-        Team A 
+        <span id="winning-team">winning team</span> won!
     </section>
     
     <section id="in-progress">
@@ -74,14 +82,14 @@
         <button id="show-score">Score V</button>
         <div class="container">
             <div id="team-a">
-                <div class="team">Team Name</div>
+                <div class="team-0-name">Team Name</div>
                 <div class="score team-0">0</div>
                 <ol class="rounds">
                     <li></li><li></li><li></li><li></li><li></li><li></li>
                 </ol>
             </div>
              <div id="team-b">
-                <div class="team">Team Name</div>
+                <div class="team-1-name">Team Name</div>
                 <div class="score team-1">0</div>
                 <ol class="rounds">
                     <li></li><li></li><li></li><li></li><li></li><li></li>
@@ -170,8 +178,8 @@
             
         }
         function calcScore(teamClassName, points){
-           var currentPoints = $(teamClassName).text() * 1;
-           var newTotal = currentPoints + points;
+            var currentPoints = $('#scoreboard').find(teamClassName).text()*1;
+            var newTotal = currentPoints + points;
             $(teamClassName).text(newTotal);
         }
         
@@ -219,6 +227,9 @@
                     localStorage.setItem('wordsString', JSON.stringify(data));
                 }
             });  
+            var teams = $('body').attr('data-teams').split(',');
+            $('.team-0-name').text(teams[0]);
+            $('.team-1-name').text(teams[1]);
             switchCurrentTeam();
             $('#start').show();
         });
