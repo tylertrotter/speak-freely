@@ -30,18 +30,22 @@
     </section>
     
     <section id="scoreboard">
-        <span class="team-0-name">Team A</span>
-        <span class="team-0">0</span>
-        <ol class="rounds">
-            <li></li><li></li><li></li><li></li><li></li><li></li>
-        </ol>
-        
-        <span class="team-1-name">Team B</span>
-        <span class="team-1">0</span>
-        <ol class="rounds">
-            <li></li><li></li><li></li><li></li><li></li><li></li>
-        </ol>
-        
+        <div class="score-container">
+            <div class="team-0">
+                <span class="team-0-name">Team A</span>
+                <span class="team-0-score">0</span>
+                <ol class="rounds">
+                    <li></li><li></li><li></li><li></li><li></li><li></li>
+                </ol>
+            </div>
+            <div class="team-1">
+                <span class="team-1-name">Team B</span>
+                <span class="team-1-score">0</span>
+                <ol class="rounds">
+                    <li></li><li></li><li></li><li></li><li></li><li></li>
+                </ol>
+            </div>
+        </div>
         <button class="start-round">Start Next Round</button>
         <div><span class="current-team">Team</span> are up next.</div>
     </section>
@@ -80,17 +84,17 @@
     
     <div id="score">
         <button id="show-score">Score V</button>
-        <div class="container">
-            <div id="team-a">
+        <div class="score-container">
+            <div class="team-0">
                 <div class="team-0-name">Team Name</div>
-                <div class="score team-0">0</div>
+                <div class="score team-0-score">0</div>
                 <ol class="rounds">
                     <li></li><li></li><li></li><li></li><li></li><li></li>
                 </ol>
             </div>
-             <div id="team-b">
+             <div class="team-1">
                 <div class="team-1-name">Team Name</div>
-                <div class="score team-1">0</div>
+                <div class="score team-1-score">0</div>
                 <ol class="rounds">
                     <li></li><li></li><li></li><li></li><li></li><li></li>
                 </ol>
@@ -160,11 +164,21 @@
         }
         function goToScoreBoard(){
             var points = $('#round-points').text() * 1;
-            var teamClassName = '.team-' + $('body').attr('data-current-team');
+            var teamClassName = '.team-' + $('body').attr('data-current-team') + '-score';
             switchCurrentTeam();
             calcScore(teamClassName,points);
+            incrementRound();
             $('body').find('>section').hide();
-            $('#scoreboard').show();
+            if( $('body').attr('data-rounds') === '12' ){
+                if($('#score').find('.team-0-score').text()*1 > $('#score').find('.team-1-score').text()*1){
+                    $('#winning-team').text($('#score').find('.team-0-name').text());        
+                }else if( $('#score').find('.team-0-score').text()*1 < $('#score').find('.team-1-score').text()*1 ){
+                    $('#winning-team').text($('#score').find('.team-1-name').text());
+                }
+               $('#gameover').show(); 
+            }else{
+                $('#scoreboard').show();
+            }
         }
         function calcRoundTotal(){
             var points = 0;
@@ -182,7 +196,18 @@
             var newTotal = currentPoints + points;
             $(teamClassName).text(newTotal);
         }
-        
+        function incrementRound(){
+            var roundNum = $('body').attr('data-rounds')*1;   
+            roundNum++;
+            $('.score-container').each(function(){
+               $(this).find('.team-0').find('.rounds').find('li').eq( Math.ceil(roundNum/2)-1 ).addClass('completed');
+                if( Math.floor(roundNum/2)-1 >= 0){
+                    $(this).find('.team-1').find('.rounds').find('li').eq( Math.floor(roundNum/2)-1 ).addClass('completed');
+                } 
+            });
+            
+            $('body').attr('data-rounds', roundNum);
+        }
         $(document).on('click', '.start-round', function(){
              startRound();   
         });

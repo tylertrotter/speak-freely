@@ -60,7 +60,7 @@ body > section{
     width: 100%;
     transition: all .3s;
 }
-#score .container{
+#score .score-container{
     padding: .5em;
     background: darkgray;
     height: 100px;
@@ -95,6 +95,6 @@ body > section{
     height: 10px;
     margin: 3px;
 }
-.rounds li.complete{
-    background: white;   
+.rounds li.completed{
+    background: red;   
 }
