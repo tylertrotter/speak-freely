@@ -70,10 +70,10 @@ body > section{
     top: inherit;
     bottom: 0;
 }
-#team-a{
+#score .team-0{
     float: left;   
 }
-#team-b{
+#score .team-1{
     float: right;   
 }
 #score .team{

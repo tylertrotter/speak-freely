@@ -11,12 +11,20 @@
         <link rel="stylesheet" href="css/main.css">
         <!-- <script src="js/vendor/modernizr-2.8.3.min.js"></script> -->
     </head>
-    <body data-rounds="0" data-teams="The Lexiconquistadors, The Word Warriors" data-score="0,0" data-current-team="1">
+    <?php
+        if (isset($_GET['r'])) {
+            echo '<body data-rounds="' . $_GET['r'] . '" data-teams="The Lexiconquistadors, The Word Warriors" data-score="' . $_GET['s'] . '" data-current-team="' . $_GET['ct'] . '">';
+        }else{
+            echo '<body data-rounds="0" data-teams="The Lexiconquistadors, The Word Warriors" data-score="0,0" data-current-team="1">';
+        }
+    ?>
+    
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <section id="start">
         <button class="start-round">Start Game</button>
+         <code>http://localhost/word-game?r=2&amp;s=10,20&amp;ct=0</code>
     </section>
     
     <section id="confirm">
@@ -48,6 +56,12 @@
         </div>
         <button class="start-round">Start Next Round</button>
         <div><span class="current-team">Team</span> are up next.</div>
+        
+        <hr>
+        
+        Save or share the current game.
+        <code>http://localhost/word-game?r=2&amp;s=10,20&amp;ct=0</code>
+        <input type="text" value="">
     </section>
     
     <section id="gameover">
@@ -253,10 +267,24 @@
                 }
             });  
             var teams = $('body').attr('data-teams').split(',');
+            var score = $('body').attr('data-score').split(',');
+            var rounds = $('body').attr('data-rounds');
+            
             $('.team-0-name').text(teams[0]);
             $('.team-1-name').text(teams[1]);
+            
+            $('.team-0-score').text(score[0]);
+            $('.team-1-score').text(score[1]);
+            
+            
             switchCurrentTeam();
-            $('#start').show();
+            <?php
+            if (isset($_GET['r'])) {
+                echo "$('#scoreboard').show();"; 
+            }else{
+                echo "$('#start').show();";
+            }
+            ?>
         });
         
         /*
