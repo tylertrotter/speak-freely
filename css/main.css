@@ -52,11 +52,15 @@ button{
 #controls button{
     width: 40px;
     height: 40px;
+    font-size: 25px;
+    padding: 0;
 }
+#pass button{ font-size: 37px; line-height: 18px; }
 #pass{
     position: absolute;
     top: 0;
     left: 0;
+    
 }
 #correct{
     position: absolute;
@@ -71,17 +75,74 @@ button{
     padding: 1em 0;
 }
 #restriction{ display: none; }
-
+.list-header{
+    position: relative;
+    border-bottom: 1px #eee solid;
+    height: 25px;
+}
+.list-header h2{
+    font-size: 18px;
+    position: absolute;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    margin: 0;
+    font-weight: normal;
+    color: #aaa;
+}
+.list-header .pass{
+    right: 40px;   
+    font-size: 33px;
+    line-height: 20px;
+}
+.list-header .correct{
+    font-size: 25px;
+    line-height: 20px;
+}
+#confirm ol{
+    padding-left: 20px;
+    margin-top: 0;
+}
+#confirm li{ 
+    position: relative;
+    padding: .5em 0;
+    padding-right: 80px;
+    line-height: 25px;
+}
 [data-confirm]{
     width: 25px;
     height: 25px;
     border: gray 1px solid;
+    position: absolute;
+    right: 0;
+    padding: 0;
+}
+[data-confirm=pass]{
+    right: 40px;   
+}
+.pass [data-confirm=pass]:before,
+.correct [data-confirm=correct]:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    line-height: 22px;
+    font-size: 33px;
 }
 .pass [data-confirm=pass]:before{
-    content: 'X';   
+    content: '\00d7'; 
 }
 .correct [data-confirm=correct]:before{
-    content: 'X';   
+    content: '\003e';
+    font-size: 25px;
+    line-height: 20px;
+}
+.total{
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: right;
+    margin: 1em 0;
 }
 #score{
     position: fixed;

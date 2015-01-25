@@ -41,14 +41,19 @@
         <section id="confirm">
             <div class="current-team">Team A</div>
             <h1>Confirm Your Results</h1>
+            <header class="list-header">
+                <h2 class="pass">&times;</h2>
+                <h2 class="correct">&gt;</h2>
+            </header>
             <ol></ol>
-            <div>
+            <div class="total">
                 Total: <span id="round-points">0</span>
             </div>
             <button id="confirm-results">Looks Good</button>
         </section>
 
         <section id="scoreboard">
+            <h1>Scoreboard</h1>
             <div class="score-container">
                 <div class="team-0">
                     <span class="team-0-name">Team A</span>
@@ -86,7 +91,7 @@
 
             <section id="controls">
                 <div id="pass">
-                    <button>X</button>
+                    <button>&times;</button>
                     <div class="points-at-stake">-3</div>
                 </div>
 
@@ -106,7 +111,7 @@
         </section>
     </div>
     <div id="score">
-        <button id="show-score">Score V</button>
+        <button id="show-score">Score &#8595;</button>
         <div class="score-container">
             <div class="pending">Points Pending</div>
             <div class="team-0">

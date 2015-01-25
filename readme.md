@@ -1,6 +1,6 @@
 
 #Speak freely
-Speak freely is a game in the vein of catch phrase and taboo but with a few extra doodads to complicate things. It is a part of a thing I'm doing called 6Prototypes. 
+Speak freely is a game in the vein of catch phrase and taboo but with a few extra doodads to complicate things. It is a part of a thing I'm doing called [6Prototypes](http://tylertrotter.com/6prototypes). 
 
 ##Rules
 The rules are in flux right now. As I get time to add functionality the rules will change, but the basics of the game are: 2 teams, 6 two-minute rounds for each team, a player tries to get teammates to guess as many random words as possible in each round. You get points for each word and lose points for passing on words. 
