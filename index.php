@@ -36,6 +36,13 @@
                 <h3>Rounds</h3>
                 <p>There are 6 rounds for each team, the team with the most points at the end of 6 rounds wins. <span class="team-0-name"></span> go first, then the <span class="team-1-name"></span>.</p>
             </section>
+            
+            <footer>
+                <div class="addthis_sharing_toolbox"></div>
+                <div class="six-prototypes">
+                    1 of <a href="http://www.tylertrotter.com/6prototypes">6Prototypes</a>
+                </div>
+            </footer>
         </section>
 
         <section id="confirm">
@@ -75,7 +82,8 @@
 
             <hr>
 
-            <button class="new-game">New Game</button>
+            <button class="new-game secondary-button">New Game</button>
+        
         </section>
 
         <section id="gameover">
@@ -211,6 +219,8 @@
                     $('#winning-team').text($('#score').find('.team-0-name').text());        
                 }else if( $('#score').find('.team-0-score').text()*1 < $('#score').find('.team-1-score').text()*1 ){
                     $('#winning-team').text($('#score').find('.team-1-name').text());
+                }else{
+                    $('#winning-team').text('Nobody');
                 }
                $('#gameover').show(); 
             }else{
@@ -222,8 +232,6 @@
                     baseUrl = baseUrl.split('?')[0];
                 var url = baseUrl + '?r=' + rounds + '&s=' + score + '&ct=' + currentTeam;
                 window.location.replace(url);
-                //$('.url').text(url);
-                //$('#scoreboard').show();
             }
         }
         function calcRoundTotal(){
@@ -340,6 +348,8 @@
         */
 
     </script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-54c5aaab0d3479f4" async="async"></script>
+
 </body>
 
 </html>
