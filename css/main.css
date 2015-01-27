@@ -5,10 +5,34 @@
 body{
     font-family: 'Raleway', sans-serif;   
 }
+h1{ margin-top: 0; }
 button{
-    border: 1px solid #aaa;
+    border: 1px solid #ccc;
     background: none;
     padding: .5em .7em;
+}
+hr{
+    border: none;
+    border-bottom: 1px solid #eee;
+    margin: 1em 0;
+}
+.start-round, #confirm-results{
+    margin: 5px auto;
+    display: block;
+    font-size: 1.2em;
+    color: #af0338;
+    border-color: #af0338;
+    background-color: #fff1f5;
+}
+.button-text{
+    text-align: center;  
+    font-size: .85em;
+    color: #888;
+}
+.secondary{
+    font-size: .9em;
+    padding: .3em .5em;
+    background: white;
 }
 .wrapper{
     max-width: 600px;
@@ -17,6 +41,13 @@ button{
 .wrapper > section{
     display: none;
     padding: 2em;
+    padding-bottom: 120px;
+}
+#instructions-link{
+    display: block;
+    margin-top: 2em;
+    text-decoration: underline;
+    cursor: pointer;
 }
 #start{
     text-align: center;    
@@ -144,12 +175,33 @@ button{
     text-align: right;
     margin: 1em 0;
 }
+#scoreboard .team-0,
+#scoreboard .team-1{
+    position: relative;
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+#scoreboard .team-0-score,
+#scoreboard .team-1-score{
+    position: absolute;
+    right: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: -5px;
+}
+#scoreboard .secondary{
+    margin: 0 auto;
+    display: block;
+}
 #score{
     position: fixed;
-    bottom: -100px;
+    bottom: -90px;
     left: 0;
     width: 100%;
     transition: all .3s;
+}
+#gameover{
+    text-align: center;
 }
 #show-score{
     border-left: none;
@@ -159,7 +211,7 @@ button{
     padding: .5em;
     background: #333;
     color: white;
-    height: 100px;
+    height: 90px;
     overflow: auto;
     position: relative;
 }
@@ -209,4 +261,15 @@ button{
 }
 .rounds li.completed{
     background: #aaa;   
+}
+footer{
+    position: fixed;
+    background: #f8f8f8;
+    border-top: 2px solid #eee;
+    bottom: 0;
+    width: 100%;
+    padding: 30px;
+    padding-top: 20px;
+    text-align: center;
+    font-size: .8em;
 }

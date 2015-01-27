@@ -24,30 +24,26 @@
             <p class="browserupgrade">You are using an outdated browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div class="wrapper">
+        
+         <section id="instructions">
+            <h1>How to Play Speak Freely</h1>
+            <p>Get one or more teammates to guess as many words in 2 minutes as you can. You can do and say pretty much anything but say the word or words, spell it out ("It starts with a G") or say something like "It's Beorge Bashington!" That's not clever, that's cheating.</p>
+            <h2>Scoring</h2>
+            <p>If you're stumped you can pass, but there will be a penalty. The harder a word is, the more points you'll get for it and the less your penalty will be if you decide to pass.</p>
+            <h3>Rounds</h3>
+            <p>There are 6 rounds for each team, the team with the most points at the end of 6 rounds wins. <span class="team-0-name"></span> go first, then the <span class="team-1-name"></span>.</p>
+            <button class="start-round">Start Game</button>
+        </section>
+        
         <section id="start">
             <h1>Speak Feely</h1>
             <button class="start-round">Start Game</button>
-
-            <section>
-                <h2>How to Play</h2>
-                <p>Get one or more teammates to guess as many words in 2 minutes as you can. You can do and say pretty much anything but say the word or words, spell it out ("It starts with a G") or say something like "It's Beorge Bashington!" That's not clever, that's cheating.</p>
-                <h3>Scoring</h3>
-                <p>If you're stumped you can pass, but there will be a penalty. The harder a word is, the more points you'll get for it and the less your penalty will be if you decide to pass.</p>
-                <h3>Rounds</h3>
-                <p>There are 6 rounds for each team, the team with the most points at the end of 6 rounds wins. <span class="team-0-name"></span> go first, then the <span class="team-1-name"></span>.</p>
-            </section>
-            
-            <footer>
-                <div class="addthis_sharing_toolbox"></div>
-                <div class="six-prototypes">
-                    1 of <a href="http://www.tylertrotter.com/6prototypes">6Prototypes</a>
-                </div>
-            </footer>
+            <div class="button-text"><a id="instructions-link">How to play</a></div>
         </section>
 
         <section id="confirm">
             <div class="current-team">Team A</div>
-            <h1>Confirm Your Results</h1>
+            <h1>Confirm Total</h1>
             <header class="list-header">
                 <h2 class="pass">&times;</h2>
                 <h2 class="correct">&gt;</h2>
@@ -78,17 +74,18 @@
                 </div>
             </div>
             <button class="start-round">Start Next Round</button>
-            <div><span class="current-team">Team</span> are up next.</div>
+            <div class="button-text"><span class="current-team">Team</span> are up next.</div>
 
             <hr>
 
-            <button class="new-game secondary-button">New Game</button>
+            <button class="new-game secondary">New Game</button>
         
         </section>
 
         <section id="gameover">
             <h1>Game Over</h1>
-            <span id="winning-team">winning team</span> won!
+            <p><span id="winning-team">winning team</span> won!</p>
+            <button class="new-game">New Game</button>
         </section>
 
         <section id="in-progress">
@@ -118,8 +115,15 @@
 
         </section>
     </div>
-    <div id="score">
-        <button id="show-score">Score &#8595;</button>
+   
+     <footer>
+        <div class="addthis_sharing_toolbox"></div>
+        <div class="six-prototypes">
+            1 of <a href="http://www.tylertrotter.com/6prototypes">6Prototypes</a>
+        </div>
+    </footer>
+     <div id="score">
+        <button id="show-score" class="secondary">Score &#8595;</button>
         <div class="score-container">
             <div class="pending">Points Pending</div>
             <div class="team-0">
@@ -145,11 +149,12 @@
     <script>
         function startRound(){
             $('.wrapper').find('>section').hide();
+            $('footer').hide();
             getWord();
             $('#in-progress').show();
             $('#confirm').find('ol').html('');
             $('#timer').find('div').css('width', 0);
-            timer(.02 * 60 * 1000);
+            timer(.01 * 60 * 1000);
         }
         function switchCurrentTeam(){
             var teams = $('body').attr('data-teams').split(',');
@@ -209,9 +214,12 @@
         function goToScoreBoard(){
             var points = $('#round-points').text() * 1;
             var teamClassName = '.team-' + $('body').attr('data-current-team') + '-score';
+            var baseUrl = window.location.href.split('#')[0]; 
+            baseUrl = baseUrl.split('?')[0];
             switchCurrentTeam();
             calcScore(teamClassName,points);
             incrementRound(); 
+            $('footer').show();
             $('.url').text();
             $('.wrapper').find('>section').hide();
             if( $('body').attr('data-rounds') === '12' ){
@@ -228,8 +236,6 @@
                 var rounds = $body.attr('data-rounds')*1 - 1;
                 var currentTeam = Math.abs($body.attr('data-current-team')*1-1);
                 var score = $('#scoreboard').find('.team-0-score').text() + ',' + $('#scoreboard').find('.team-1-score').text();
-                    var baseUrl = window.location.href.split('#')[0];    
-                    baseUrl = baseUrl.split('?')[0];
                 var url = baseUrl + '?r=' + rounds + '&s=' + score + '&ct=' + currentTeam;
                 window.location.replace(url);
             }
@@ -254,21 +260,40 @@
             var roundNum = $('body').attr('data-rounds')*1;   
             roundNum++;
             $('.score-container').each(function(){
-                $(this).find('.team-0').find('.rounds').find('li').eq( Math.ceil(roundNum/2) ).prevAll().addClass('completed');
-                $(this).find('.team-1').find('.rounds').find('li').eq( Math.floor(roundNum/2) ).prevAll().addClass('completed');
+                var latestRound0 = $(this).find('.team-0').find('.rounds').find('li').eq( Math.ceil(roundNum/2) );
+                var latestRound1 = $(this).find('.team-1').find('.rounds').find('li').eq( Math.floor(roundNum/2) );
+                if( latestRound0.size() ){
+                    latestRound0.prevAll().addClass('completed');
+                }else{
+                    $(this).find('.team-0').find('.rounds').find('li').addClass('completed');
+                }
+                if( latestRound1.size() ){
+                    latestRound1.prevAll().addClass('completed');
+                }else{
+                    $(this).find('.team-1').find('.rounds').find('li').addClass('completed');
+                }
             });
             
             $('body').attr('data-rounds', roundNum);
         }
         $(document).on('click', '.new-game', function(){
-            var wantsNewGame = confirm('Do you want to abandon this game?');
-            if( wantsNewGame ){
+            if( $(this).parents('#gameover').size() ){
                 window.location = window.location.href.split('?')[0];
+            }else{
+                var wantsNewGame = confirm('Do you want to abandon this game?');
+                if( wantsNewGame ){
+                    window.location = window.location.href.split('?')[0];
+                }
             }
         });
               
         $(document).on('click', '.start-round', function(){
              startRound();   
+        });
+        
+        $(document).on('click', '#instructions-link', function(){
+             $('.wrapper').find('>section').hide();
+             $('#instructions').show();
         });
         
         wordNumber = 0;
@@ -323,6 +348,9 @@
             
             $('.team-0-score').text(score[0]);
             $('.team-1-score').text(score[1]);
+            
+            //var baseUrl = window.location.href.split('#')[0];   
+           // $('.addthis_sharing_toolbox').attr('data-url', baseUrl);
             
             
             switchCurrentTeam();
