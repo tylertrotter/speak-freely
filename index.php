@@ -154,7 +154,7 @@
             $('#in-progress').show();
             $('#confirm').find('ol').html('');
             $('#timer').find('div').css('width', 0);
-            timer(.01 * 60 * 1000);
+            timer(2 * 60 * 1000);
         }
         function switchCurrentTeam(){
             var teams = $('body').attr('data-teams').split(',');
